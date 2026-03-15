@@ -1,6 +1,7 @@
 /* ============================================================
    OpenG2P Staff Portal – Keycloak Login Theme
-   Design: Dark background, gold/amber accents, two-column layout
+   Keycloak 26+ (quay.io/keycloak/keycloak:latest)
+   Standalone FTL pages — no template.ftl macro imports
    ============================================================ */
 
 /* ---------- Google Fonts ---------- */
@@ -33,11 +34,7 @@
 }
 
 /* ---------- Reset & Base ---------- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   height: 100%;
@@ -47,19 +44,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: var(--accent-gold);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
+a { color: var(--accent-gold); text-decoration: none; transition: color 0.2s ease; }
 a:hover { color: var(--accent-gold-light); }
 
 /* ---------- Header Bar ---------- */
 .kc-header-bar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: var(--header-h);
   background: var(--bg-primary);
   border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -70,57 +61,26 @@ a:hover { color: var(--accent-gold-light); }
   z-index: 100;
 }
 
-.kc-header-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.kc-header-logo {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
+.kc-header-brand { display: flex; align-items: center; gap: 10px; }
+.kc-header-logo { width: 32px; height: 32px; object-fit: contain; }
 .kc-header-title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text-primary); letter-spacing: -0.01em;
 }
-
-.kc-header-user {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.kc-bell-icon {
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: color 0.2s;
-}
+.kc-header-user { display: flex; align-items: center; gap: 14px; }
+.kc-bell-icon { color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
 .kc-bell-icon:hover { color: var(--text-primary); }
-
-.kc-header-username {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
+.kc-header-username { font-size: 0.9rem; color: var(--text-secondary); }
 .kc-avatar {
-  width: 36px;
-  height: 36px;
+  width: 36px; height: 36px;
   background: var(--accent-gold);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #000; cursor: pointer;
 }
 
-/* ---------- Main Page Container ---------- */
+/* ---------- Main Page Container (two-column, login page only) ---------- */
 .kc-page-container {
   min-height: 100vh;
   padding-top: var(--header-h);
@@ -131,6 +91,11 @@ a:hover { color: var(--accent-gold-light); }
   gap: 40px;
   padding-left: 80px;
   padding-right: 80px;
+}
+
+/* Centered variant for error/otp/verify etc. */
+.kc-page-container--centered {
+  justify-content: center;
 }
 
 /* ---------- Hero / Left Section ---------- */
@@ -160,44 +125,23 @@ a:hover { color: var(--accent-gold-light); }
 }
 
 .kc-cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--accent-gold);
-  color: #000;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 13px 22px;
-  border-radius: 50px;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent-gold); color: #000;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
+  padding: 13px 22px; border-radius: 50px;
   transition: background 0.2s, transform 0.2s;
-  cursor: pointer;
-  border: none;
+  cursor: pointer; border: none;
 }
-
 .kc-cta-button svg {
-  background: #1a1a1a;
-  color: #fff;
-  border-radius: 50%;
-  padding: 3px;
-  width: 26px;
-  height: 26px;
-  transition: background 0.2s;
+  background: #1a1a1a; color: #fff; border-radius: 50%;
+  padding: 3px; width: 26px; height: 26px;
 }
+.kc-cta-button:hover { background: var(--accent-gold-light); color: #000; transform: translateY(-1px); }
 
-.kc-cta-button:hover {
-  background: var(--accent-gold-light);
-  color: #000;
-  transform: translateY(-1px);
-}
-
-/* ---------- Illustration Area ---------- */
+/* ---------- Illustration ---------- */
 .kc-hero-illustration {
-  margin-top: 40px;
-  position: relative;
-  width: 100%;
-  max-width: 460px;
-  height: 220px;
+  margin-top: 40px; position: relative;
+  width: 100%; max-width: 460px; height: 220px;
 }
 
 .kc-illustration-grid {
@@ -205,37 +149,20 @@ a:hover { color: var(--accent-gold-light); }
   grid-template-columns: repeat(4, 52px);
   grid-template-rows: repeat(2, 52px);
   gap: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: absolute; bottom: 0; left: 0;
 }
 
 .kc-grid-icon {
-  width: 52px;
-  height: 52px;
+  width: 52px; height: 52px;
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
 }
-
-.kc-grid-icon--dark {
-  background: #2a2a2a;
-  color: var(--text-secondary);
-}
-
-.kc-grid-icon--yellow {
-  background: var(--accent-gold);
-  color: #000;
-}
+.kc-grid-icon--dark  { background: #2a2a2a; color: var(--text-secondary); }
+.kc-grid-icon--yellow { background: var(--accent-gold); color: #000; }
 
 .kc-crane-svg {
-  width: 240px;
-  height: 200px;
-  display: block;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  width: 240px; height: 200px;
+  display: block; position: absolute; right: 0; bottom: 0;
 }
 
 /* ---------- Login Card ---------- */
@@ -247,482 +174,227 @@ a:hover { color: var(--accent-gold-light); }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: 40px 36px;
-  position: relative;
+}
+
+/* Narrow variant for single-purpose pages */
+.kc-login-card--narrow {
+  width: 400px;
+  max-width: 100%;
 }
 
 .kc-login-card-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
 }
 
-/* Card Logo */
-.kc-card-logo-wrap {
-  margin-bottom: 8px;
-}
+.kc-card-logo-wrap { margin-bottom: 8px; }
+.kc-card-logo { width: 56px; height: 56px; object-fit: contain; }
 
-.kc-card-logo {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-}
-
-/* Card Titles */
 .kc-card-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.5rem; font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 6px;
-  text-align: center;
+  margin-bottom: 6px; text-align: center;
 }
 
 .kc-card-subtitle {
-  font-size: 0.95rem;
-  color: var(--accent-gold);
-  font-weight: 500;
-  margin-bottom: 28px;
-  text-align: center;
+  font-size: 0.95rem; color: var(--accent-gold);
+  font-weight: 500; margin-bottom: 28px; text-align: center;
 }
 
-/* ---------- Form Styles ---------- */
-.kc-form-fields {
-  width: 100%;
-}
+/* ---------- Form ---------- */
+form { width: 100%; }
 
-#kc-form-login,
-#kc-reset-password-form,
-#kc-passwd-update-form,
-#kc-otp-login-form {
-  width: 100%;
-}
-
-/* Using mapped class names from theme.properties */
-.kc-form-group {
-  margin-bottom: 18px;
-  width: 100%;
-}
+.kc-form-group { margin-bottom: 18px; width: 100%; }
 
 .kc-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 7px;
+  display: block; font-size: 0.875rem; font-weight: 500;
+  color: var(--text-primary); margin-bottom: 7px;
 }
 
-/* Fallback for base Keycloak class names */
-.kcFormGroupClass { margin-bottom: 18px; width: 100%; }
-.kcLabelClass { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-primary); margin-bottom: 7px; }
-
-.kc-input,
-.kcInputClass,
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  width: 100%;
-  padding: 13px 16px;
-  background: var(--input-bg);
-  color: var(--input-text);
+.kc-input {
+  width: 100%; padding: 13px 16px;
+  background: var(--input-bg); color: var(--input-text);
   border: 1.5px solid transparent;
   border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-family: var(--font-body); font-size: 0.9rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-
-.kc-input:focus,
-.kcInputClass:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
+.kc-input:focus {
   border-color: var(--accent-gold);
   box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.18);
 }
+.kc-input::placeholder { color: var(--input-placeholder); }
 
-.kc-input::placeholder,
-.kcInputClass::placeholder,
-input::placeholder {
-  color: var(--input-placeholder);
-}
-
-/* Input group (with password toggle) */
-.kc-input-group,
-.kcInputGroup {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-}
-
-.kc-input-group input,
-.kcInputGroup input {
+.kc-input-group { display: flex; align-items: stretch; }
+.kc-input-group .kc-input {
   flex: 1;
   border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
-.kc-password-toggle,
-.kcFormPasswordVisibilityButtonClass {
+.kc-password-toggle {
   background: var(--input-bg);
-  border: 1.5px solid transparent;
-  border-left: none;
+  border: 1.5px solid transparent; border-left: none;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 0 14px;
-  cursor: pointer;
+  padding: 0 14px; cursor: pointer;
   color: var(--input-placeholder);
+  display: flex; align-items: center;
   transition: color 0.2s;
-  display: flex;
-  align-items: center;
+}
+.kc-password-toggle:hover { color: var(--input-text); }
+
+.kc-input-error {
+  color: var(--error); font-size: 0.8rem;
+  margin-top: 5px; display: block;
 }
 
-.kc-password-toggle:hover,
-.kcFormPasswordVisibilityButtonClass:hover {
-  color: var(--input-text);
-}
-
-/* Error messages */
-.kc-input-error,
-.kcInputErrorMessageClass {
-  color: var(--error);
-  font-size: 0.8rem;
-  margin-top: 5px;
-  display: block;
-}
-
-/* ---------- Form Options Row (remember me + forgot pw) ---------- */
+/* ---------- Form options row ---------- */
 .kc-form-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
 }
 
-.forgot-password a {
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  transition: color 0.2s;
+.kc-checkbox-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
 }
-.forgot-password a:hover { color: var(--accent-gold); }
-
-.checkbox label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  cursor: pointer;
+.kc-checkbox-label input[type="checkbox"] {
+  width: 16px; height: 16px; accent-color: var(--accent-gold);
 }
 
-.checkbox input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent-gold);
+.kc-forgot-link {
+  font-size: 0.85rem; color: var(--text-primary);
 }
+.kc-forgot-link:hover { color: var(--accent-gold); }
 
-/* ---------- Buttons ---------- */
-.kc-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 13px 20px;
-  border: none;
-  border-radius: var(--radius-md);
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
+/* ---------- Primary button ---------- */
+.kc-btn-primary {
+  display: block; width: 100%;
+  padding: 14px; margin-top: 4px;
+  background: var(--accent-gold); color: #000;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  border: none; border-radius: var(--radius-md);
+  cursor: pointer; text-align: center; text-decoration: none;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  text-decoration: none;
+  letter-spacing: 0.01em;
 }
-
-.kc-btn--primary,
-.kcButtonPrimaryClass {
-  background: var(--accent-gold);
-  color: #000;
-}
-
-.kc-btn--primary:hover,
-.kcButtonPrimaryClass:hover {
-  background: var(--accent-gold-light);
+.kc-btn-primary:hover {
+  background: var(--accent-gold-light); color: #000;
   box-shadow: 0 6px 20px rgba(245, 166, 35, 0.35);
   transform: translateY(-1px);
 }
+.kc-btn-primary:active { transform: translateY(0); box-shadow: none; }
 
-.kc-btn--primary:active,
-.kcButtonPrimaryClass:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
+/* As an anchor tag */
+a.kc-btn-primary { margin-top: 12px; }
 
-.kc-btn--default,
-.kcButtonDefaultClass {
-  background: #2a2a2a;
-  color: var(--text-secondary);
-  border: 1px solid rgba(255,255,255,0.1);
+/* ---------- Default (secondary) button ---------- */
+.kc-btn-default {
+  display: block; width: 100%;
+  padding: 12px; margin-top: 10px;
+  background: #2a2a2a; color: var(--text-secondary);
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md);
+  cursor: pointer; text-align: center;
+  transition: background 0.2s, color 0.2s;
 }
+.kc-btn-default:hover { background: #333; color: var(--text-primary); }
 
-.kc-btn--default:hover,
-.kcButtonDefaultClass:hover {
-  background: #333;
-  color: var(--text-primary);
-}
-
-.kc-btn--block,
-.kcButtonBlockClass {
-  width: 100%;
-}
-
-.kc-btn--large,
-.kcButtonLargeClass {
-  padding: 14px 20px;
-  font-size: 1rem;
-}
-
-/* Primary submit shorthand for base KC */
-input[type="submit"].kcButtonPrimaryClass,
-input[type="submit"]#kc-login {
-  width: 100%;
-  padding: 14px;
-  background: var(--accent-gold);
-  color: #000;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  margin-top: 8px;
-}
-input[type="submit"].kcButtonPrimaryClass:hover,
-input[type="submit"]#kc-login:hover {
-  background: var(--accent-gold-light);
-  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.35);
-  transform: translateY(-1px);
-}
-
-/* ---------- Back to login link ---------- */
+/* ---------- Back to login ---------- */
 .kc-back-to-login {
-  text-align: center;
-  margin-top: 16px;
+  text-align: center; margin-top: 18px; width: 100%;
 }
-
-.kc-back-to-login a {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
+.kc-back-to-login a { font-size: 0.875rem; color: var(--text-secondary); }
 .kc-back-to-login a:hover { color: var(--text-primary); }
 
-/* ---------- Feedback / Flash Messages ---------- */
+/* ---------- Flash / Alert messages ---------- */
 .kc-feedback {
-  width: 100%;
-  padding: 11px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  margin-bottom: 16px;
-  text-align: center;
+  width: 100%; padding: 11px 14px;
+  border-radius: var(--radius-sm); font-size: 0.85rem;
+  margin-bottom: 16px; text-align: center;
+}
+.kc-feedback--error   { background: rgba(255,94,94,0.12);   color: var(--error);    border: 1px solid rgba(255,94,94,0.3); }
+.kc-feedback--warning { background: rgba(245,166,35,0.1);   color: var(--accent-gold); border: 1px solid rgba(245,166,35,0.3); }
+.kc-feedback--success { background: rgba(80,200,120,0.1);   color: #50c878;         border: 1px solid rgba(80,200,120,0.3); }
+.kc-feedback--info    { background: rgba(100,160,255,0.1);  color: #64a0ff;         border: 1px solid rgba(100,160,255,0.3); }
+
+/* ---------- Status icon (error/info/expired pages) ---------- */
+.kc-status-icon {
+  margin-bottom: 8px;
+}
+.kc-status-icon--error { color: var(--error); }
+.kc-status-icon--info  { color: #64a0ff; }
+.kc-status-icon--warn  { color: var(--accent-gold); }
+
+.kc-status-message {
+  font-size: 0.95rem; color: var(--text-secondary);
+  line-height: 1.6; text-align: center; margin-bottom: 8px;
+}
+.kc-status-message--sub {
+  font-size: 0.85rem; color: var(--text-muted);
 }
 
-.kc-feedback--error {
-  background: rgba(255, 94, 94, 0.12);
-  color: var(--error);
-  border: 1px solid rgba(255, 94, 94, 0.3);
+/* ---------- Social providers ---------- */
+.kc-social-divider {
+  width: 100%; text-align: center; position: relative; margin: 20px 0 12px;
+}
+.kc-social-divider::before {
+  content: ''; position: absolute; top: 50%; left: 0; right: 0;
+  height: 1px; background: rgba(255,255,255,0.08);
+}
+.kc-social-divider span {
+  position: relative; background: var(--bg-card);
+  padding: 0 12px; font-size: 0.8rem; color: var(--text-muted);
 }
 
-.kc-feedback--warning {
-  background: rgba(245, 166, 35, 0.1);
-  color: var(--accent-gold);
-  border: 1px solid rgba(245, 166, 35, 0.3);
+.kc-social-list {
+  list-style: none; display: flex; flex-direction: column; gap: 10px; width: 100%;
 }
-
-.kc-feedback--success {
-  background: rgba(80, 200, 120, 0.1);
-  color: #50c878;
-  border: 1px solid rgba(80, 200, 120, 0.3);
-}
-
-.kc-feedback--info {
-  background: rgba(100, 160, 255, 0.1);
-  color: #64a0ff;
-  border: 1px solid rgba(100, 160, 255, 0.3);
-}
-
-/* ---------- Info / Error / Expired pages ---------- */
-.kc-error-page,
-.kc-info-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 16px 0;
-  gap: 16px;
-  width: 100%;
-}
-
-.kc-error-icon {
-  color: var(--error);
-  opacity: 0.85;
-}
-
-.kc-info-icon {
-  color: var(--accent-gold);
-}
-
-.kc-info-icon--warn {
-  color: var(--accent-gold);
-}
-
-.kc-error-message {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.kc-info-message {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.kc-info-message--sub {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.kc-back-link {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 10px 24px;
-  background: var(--accent-gold);
-  color: #000;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  transition: background 0.2s;
-}
-.kc-back-link:hover {
-  background: var(--accent-gold-light);
-  color: #000;
-}
-
-/* ---------- Footer ---------- */
-.kc-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: var(--footer-h);
-  background: #161616;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  z-index: 100;
-}
-
-.kc-footer-copyright {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.kc-footer-links {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.kc-footer-links a {
-  color: var(--text-muted);
-  transition: color 0.2s;
-}
-.kc-footer-links a:hover { color: var(--text-primary); }
-
-.kc-footer-sep {
-  color: var(--text-muted);
-}
-
-/* ---------- Social Login (if enabled) ---------- */
-#kc-social-providers {
-  margin-top: 20px;
-  width: 100%;
-}
-
-#kc-social-providers ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-#kc-social-providers .zocial {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 11px;
-  border-radius: var(--radius-md);
-  background: #2a2a2a;
-  color: var(--text-primary);
-  font-size: 0.9rem;
+.kc-social-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 11px;
+  background: #2a2a2a; color: var(--text-primary);
+  font-size: 0.9rem; border-radius: var(--radius-md);
   border: 1px solid rgba(255,255,255,0.08);
   transition: background 0.2s, border-color 0.2s;
 }
+.kc-social-btn:hover { background: #333; border-color: rgba(255,255,255,0.15); color: var(--text-primary); }
 
-#kc-social-providers .zocial:hover {
-  background: #333;
-  border-color: rgba(255,255,255,0.15);
+/* ---------- Footer ---------- */
+.kc-footer {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--footer-h);
+  background: #161616;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; z-index: 100;
 }
-
-/* ---------- Locale selector ---------- */
-#kc-locale {
-  position: relative;
-}
-
-#kc-current-locale-link {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
+.kc-footer-copyright { font-size: 0.8rem; color: var(--text-muted); }
+.kc-footer-links { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+.kc-footer-links a { color: var(--text-muted); transition: color 0.2s; }
+.kc-footer-links a:hover { color: var(--text-primary); }
+.kc-footer-sep { color: var(--text-muted); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
-  .kc-page-container {
-    padding-left: 40px;
-    padding-right: 40px;
-    gap: 24px;
-  }
+  .kc-page-container { padding-left: 40px; padding-right: 40px; gap: 24px; }
   .kc-hero-title { font-size: 2rem; }
 }
 
 @media (max-width: 820px) {
   .kc-page-container {
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: calc(var(--header-h) + 32px) 24px calc(var(--footer-h) + 32px);
     gap: 32px;
   }
-
-  .kc-hero-section {
-    max-width: 100%;
-    text-align: center;
-    padding: 0;
-  }
-
+  .kc-hero-section { max-width: 100%; text-align: center; padding: 0; }
   .kc-hero-subtitle { max-width: 100%; }
-
   .kc-hero-illustration { display: none; }
-
   .kc-cta-button { margin: 0 auto; }
-
-  .kc-login-card {
-    width: 100%;
-    max-width: 440px;
-  }
+  .kc-login-card { width: 100%; max-width: 440px; }
+  .kc-login-card--narrow { width: 100%; }
 }
 
 @media (max-width: 480px) {
