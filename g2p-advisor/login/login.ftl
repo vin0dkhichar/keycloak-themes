@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>${msg("loginTitle",(realm.displayName!''))}</title>
-    <link rel="icon" href="${url.resourcesPath}/img/logo-mark.png"/>
+    <link rel="icon" href="${url.resourcesPath}/img/favicon.png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>

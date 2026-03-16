@@ -6,8 +6,9 @@ LOGOS_DIR="$SCRIPT_DIR/logos"
 
 mkdir -p "$IMG_DIR"
 
-cp "$LOGOS_DIR/openg2p-favicon-for-dark-background.png" "$IMG_DIR/logo-mark.png"
-cp "$LOGOS_DIR/openg2p-logo-for-dark-background.png"    "$IMG_DIR/openg2p-logo.png"
-cp "$LOGOS_DIR/login-page-graphics.png"                  "$IMG_DIR/login-page-graphics.png"
+cp "$LOGOS_DIR/openg2p-favicon-for-dark-background.png"   "$IMG_DIR/logo-mark.png"
+cp "$LOGOS_DIR/openg2p-favicon-for-light-background.png"  "$IMG_DIR/favicon.png"
+cp "$LOGOS_DIR/openg2p-logo-for-dark-background.png"      "$IMG_DIR/openg2p-logo.png"
+cp "$LOGOS_DIR/login-page-graphics.png"                   "$IMG_DIR/login-page-graphics.png"
 
 echo "✅ Images copied to $IMG_DIR"
