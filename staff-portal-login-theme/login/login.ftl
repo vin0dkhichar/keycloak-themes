@@ -1,6 +1,6 @@
 <#import "template.ftl" as layout>
 
-<@layout.registrationLayout bodyClass="openg2p-login" displayInfo=false displayMessage=true; section>
+<@layout.registrationLayout bodyClass="openg2p-login" displayInfo=false displayMessage=false; section>
   <#if section == "form">
 
     <div class="page-wrapper">
@@ -12,11 +12,10 @@
           <h1>Welcome to OpenG2P</h1>
 
           <p class="description">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text.
+            A one-stop platform to access OpenG2P's modules and functionalities.
           </p>
 
-          <button class="contact-btn">
+          <button class="contact-btn" onclick="window.open('https://www.openg2p.org/', '_blank')">
             <span>Get in touch</span>
             <span class="arrow">
               <img src="${url.resourcesPath}/img/arrow.svg" alt="arrow" />
@@ -42,7 +41,13 @@
 
             <h2 class="title">Staff Portal</h2>
 
-            <p class="subtitle">Hello! Login your account</p>
+            <p class="subtitle">Log in to your account</p>
+
+            <#if message?has_content>
+              <div class="custom-message ${message.type}">
+                ${kcSanitize(message.summary)?no_esc}
+              </div>
+            </#if>
 
             <form id="kc-form-login" action="${url.loginAction}" method="post">
 
@@ -78,8 +83,17 @@
               </#if>
 
               <button type="submit" class="login-btn">
-                Login Now
+                Log in
               </button>
+
+              <div class="powered-by">
+                <span>Powered by</span>
+                <img
+                  src="${url.resourcesPath}/img/keycloak.svg"
+                  alt="Keycloak"
+                  class="powered-logo"
+                />
+              </div>
 
             </form>
 
@@ -90,4 +104,20 @@
     </div>
 
   </#if>
+  <div class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        © 2026 OpenG2P.org. All Rights Reserved.
+      </div>
+
+      <div class="footer-right">
+        <a href="https://www.openg2p.org/privacy-policy" class="footer-link" target="_blank" rel="noopener noreferrer">
+          Privacy Policy
+        </a>
+        <a href="https://www.openg2p.org" class="footer-link" target="_blank" rel="noopener noreferrer">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
 </@layout.registrationLayout>
