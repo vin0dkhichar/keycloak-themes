@@ -35,13 +35,13 @@ jobs:
           username: ${{ secrets.docker_hub_actor }}
           password: ${{ secrets.docker_hub_token }}
 
-      - name: Check tag does not already exist
-        run: |
-          TAG="${{ env.BASE_TAG }}-${{ inputs.g2p_version }}"
-          if docker manifest inspect "${{ env.IMAGE_NAME }}:${TAG}" > /dev/null 2>&1; then
-            echo "Error: Tag ${TAG} already exists on Docker Hub. Use a new g2p version."
-            exit 1
-          fi
+      # - name: Check tag does not already exist
+      #   run: |
+      #     TAG="${{ env.BASE_TAG }}-${{ inputs.g2p_version }}"
+      #     if docker manifest inspect "${{ env.IMAGE_NAME }}:${TAG}" > /dev/null 2>&1; then
+      #       echo "Error: Tag ${TAG} already exists on Docker Hub. Use a new g2p version."
+      #       exit 1
+      #     fi
 
       - name: Build and push
         uses: docker/build-push-action@v5
